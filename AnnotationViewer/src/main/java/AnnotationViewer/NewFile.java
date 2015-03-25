@@ -4,47 +4,37 @@
  */
 package AnnotationViewer;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Karlijn
  */
 public class NewFile {
 
-    
-
-    public Sequence fillArray(String seq[]) {
-        ArrayList<Sequence> NewFileArray = new ArrayList();
+    public Polynucleotide stringToObject(String seq[]) {
+        Polynucleotide o = null;
         try {
-            String dnaOrRna = checkDnaRna(seq[1]);            
+            String dnaOrRna = checkDnaRna(seq[1]);
             switch (dnaOrRna) {
-                
+
                 case "DNA":
-                    Sequence dna = new DNA();
-                    dna.setSequence(seq[1]);
-                    dna.setDescription(seq[0]);
-                    //NewFileArray.add(dna);
-                    return dna;
-                    //break;
-                    
+                    o = new DNA();
+                    o.setSequence(seq[1]);
+                    o.setDescription(seq[0]);
+                    break;
+
                 case "RNA":
-                    Sequence rna = new RNA();
-                    rna.setSequence(seq[1]);
-                    rna.setDescription(seq[0]);
-                    //NewFileArray.add(rna);
-                    return rna;
-                    //break;
-                    
+                    o = new RNA();
+                    o.setSequence(seq[1]);
+                    o.setDescription(seq[0]);
+                    break;
+
                 default:
-                    return null;
-                    //break;
+                    break;
             }
         } catch (wrongSeq err) {
             System.out.println(err.getMessage());
         }
-        //return Object();
-        //return NewFileArray;
+        return o;
     }
 
     public String checkDnaRna(String seq) throws wrongSeq {
@@ -52,22 +42,15 @@ public class NewFile {
         if (seq == null) {
             throw new wrongSeq("De sequentie is leeg");
         } else {
-
-            for (int i = 0; i < seq.length(); i++) {
-                switch (seq) {
-                    case "[ATCG]*":
-                        type = "DNA";
-                        break;
-                    case "[AUCG]*":
-                        type = "RNA";
-                        break;
-                    default:
-                        type = null;
-                        break;
+                if (seq.matches("[ATCG]*")) {
+                    type = "DNA";
+                } else if (seq.matches("[AUCG]*")) {
+                    type = "RNA";
+                } else {
+                    throw new wrongSeq("De sequentie is niet correct");
                 }
-            }
-
+            
+            return type;
         }
-        return type;
     }
 }
