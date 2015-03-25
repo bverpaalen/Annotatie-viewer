@@ -6,6 +6,7 @@
 package annotationviewer;
 
 import java.awt.Component;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author Jayyzz
  */
 public class Gui extends javax.swing.JFrame {
-
+    String filename = "";
     /**
      * Creates new form Gui
      */
@@ -126,6 +127,11 @@ public class Gui extends javax.swing.JFrame {
 
         ItemOpen.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         ItemOpen.setText("Open");
+        ItemOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ItemOpenActionPerformed(evt);
+            }
+        });
         File.add(ItemOpen);
 
         Save.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
@@ -402,6 +408,17 @@ public class Gui extends javax.swing.JFrame {
     "This is a help button."
             + "\n" +"Go read the fucking manual");
     }//GEN-LAST:event_HelpButtonActionPerformed
+
+    private void ItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemOpenActionPerformed
+        // TODO add your handling code here:
+        JFileChooser c = new JFileChooser();
+        // Demonstrate "Open" dialog:
+        int rVal = c.showOpenDialog(Gui.this);
+        if (rVal == JFileChooser.APPROVE_OPTION) {
+            filename = (c.getCurrentDirectory().toString() + "\\" + c.getSelectedFile().getName());
+            System.out.println(filename);
+        }
+    }//GEN-LAST:event_ItemOpenActionPerformed
 
     /**
      * @param args the command line arguments
