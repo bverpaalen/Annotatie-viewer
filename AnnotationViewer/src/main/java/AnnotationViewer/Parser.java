@@ -34,7 +34,6 @@ public class Parser {
         for (int i = 1; i < lijst.length; i++) {
             String[] lijst2 = (lijst[i]).split("genome");
             for (int j = 0; j < lijst2.length; j++) {
-                //System.out.println("i"+i+"j"+j+lijst2[j]);
                 descriptionSequence[i][j] = lijst2[j];
 
             }
