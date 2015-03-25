@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package annotatietoolrenske;
+package annotationviewer;
+
+import java.awt.Component;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -113,6 +116,11 @@ public class Gui extends javax.swing.JFrame {
         FeatureShow.setText("Features");
 
         HelpButton.setText("Help");
+        HelpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HelpButtonActionPerformed(evt);
+            }
+        });
 
         File.setText("File");
 
@@ -386,6 +394,14 @@ public class Gui extends javax.swing.JFrame {
     private void AddGeneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddGeneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_AddGeneActionPerformed
+
+    private void HelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HelpButtonActionPerformed
+        Component frame = null;
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(frame,
+    "This is a help button."
+            + "\n" +"Go read the fucking manual");
+    }//GEN-LAST:event_HelpButtonActionPerformed
 
     /**
      * @param args the command line arguments
