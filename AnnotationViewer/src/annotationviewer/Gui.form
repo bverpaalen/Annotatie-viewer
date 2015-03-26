@@ -16,6 +16,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Open"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ItemOpenActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="Save">
               <Properties>
@@ -443,6 +446,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Help"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HelpButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
