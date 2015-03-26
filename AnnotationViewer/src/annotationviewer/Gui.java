@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class Gui extends javax.swing.JFrame {
     String filename = "";
+    
     /**
      * Creates new form Gui
      */
@@ -412,11 +413,13 @@ public class Gui extends javax.swing.JFrame {
     private void ItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemOpenActionPerformed
         // TODO add your handling code here:
         JFileChooser c = new JFileChooser();
+        AV av = new AV();
         // Demonstrate "Open" dialog:
         int rVal = c.showOpenDialog(Gui.this);
         if (rVal == JFileChooser.APPROVE_OPTION) {
             filename = (c.getCurrentDirectory().toString() + "\\" + c.getSelectedFile().getName());
             System.out.println(filename);
+            av.makeArrayList(filename);
         }
     }//GEN-LAST:event_ItemOpenActionPerformed
 
@@ -429,6 +432,7 @@ public class Gui extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -436,13 +440,7 @@ public class Gui extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
