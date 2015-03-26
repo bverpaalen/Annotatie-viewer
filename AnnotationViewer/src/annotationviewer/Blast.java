@@ -30,9 +30,10 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
  */
 public class Blast {
     //testje
+    /*
     public static void main(String[] args) throws Exception {
         blastp("MKWVTFISLLFLFSSAYSRGVFRRDAHKSEVAHRFKDLGEENFKALVLIAFAQYLQQCP",200);
-    }
+    }*/
 private static final String OUTPUT_FILE = "blastOutput.xml"; //file naam met output blast
 public static String blastp(String seq,int aantalAligNumber) throws CompoundNotFoundException, Exception{
     NCBIQBlastService service = new NCBIQBlastService();
