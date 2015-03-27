@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package AnnotationViewer;
+package annotationviewer;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class AV {
 
     static ArrayList<Polynucleotide> NewFileArray = new ArrayList();
 
-    public static void main(String[] args) {
+    public void bla1() {
         AV.makeArrayList();
         for (int i = 0; i < NewFileArray.size(); i++) {
             if (NewFileArray.get(i) == null) {

@@ -5,7 +5,10 @@
  */
 package annotationviewer;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
+import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -14,8 +17,9 @@ import javax.swing.JOptionPane;
  * @author Jayyzz
  */
 public class Gui extends javax.swing.JFrame {
+
     String filename = "";
-    
+
     /**
      * Creates new form Gui
      */
@@ -43,6 +47,7 @@ public class Gui extends javax.swing.JFrame {
         FeatureView = new javax.swing.JScrollPane();
         FeatureShow = new javax.swing.JLabel();
         HelpButton = new javax.swing.JButton();
+        showMe = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         File = new javax.swing.JMenu();
         ItemOpen = new javax.swing.JMenuItem();
@@ -121,6 +126,13 @@ public class Gui extends javax.swing.JFrame {
         HelpButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 HelpButtonActionPerformed(evt);
+            }
+        });
+
+        showMe.setText("Show me!");
+        showMe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showMeActionPerformed(evt);
             }
         });
 
@@ -338,51 +350,64 @@ public class Gui extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FeatureView, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SequenceView, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(SequenceInfo)
-                    .addComponent(GeneView)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCheckBox5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCheckBox2))
-                            .addComponent(FeatureShow))
-                        .addGap(0, 954, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(GeneView, javax.swing.GroupLayout.PREFERRED_SIZE, 1162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SequenceView, javax.swing.GroupLayout.PREFERRED_SIZE, 1162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(FeatureShow))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(HelpButton)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(showMe)
+                        .addGap(382, 382, 382))
+                    .addComponent(SequenceInfo)))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(HelpButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(FeatureView, javax.swing.GroupLayout.PREFERRED_SIZE, 1162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(HelpButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(SequenceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(SequenceInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(GeneView, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(GeneView, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox1)
+                            .addComponent(jCheckBox4)
+                            .addComponent(jCheckBox5)
+                            .addComponent(jCheckBox3)
+                            .addComponent(jCheckBox2)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(showMe)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SequenceView, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox2))
-                .addGap(18, 18, 18)
-                .addComponent(SequenceView, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(FeatureShow)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(FeatureView, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addComponent(FeatureView, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -416,20 +441,21 @@ public class Gui extends javax.swing.JFrame {
         Component frame = null;
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(frame,
-    "This is a help button."
-            + "\n" +"Go read the fucking manual");
+                "This is a help button."
+                + "\n" + "Go read the fucking manual");
     }//GEN-LAST:event_HelpButtonActionPerformed
 
     private void ItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemOpenActionPerformed
         // TODO add your handling code here:
         JFileChooser c = new JFileChooser();
-        AV av = new AV();
+        NewFile newFile = new NewFile();
         // Demonstrate "Open" dialog:
         int rVal = c.showOpenDialog(Gui.this);
         if (rVal == JFileChooser.APPROVE_OPTION) {
             filename = (c.getCurrentDirectory().toString() + "\\" + c.getSelectedFile().getName());
             System.out.println(filename);
-            av.makeArrayList(filename);
+            newFile.makeObjectArrayList(filename);
+            
         }
     }//GEN-LAST:event_ItemOpenActionPerformed
 
@@ -438,17 +464,19 @@ public class Gui extends javax.swing.JFrame {
     //TODO welke variabelen is de seq?
     private void blastPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blastPActionPerformed
         // TODO add your handling code here:
-        blastP(seq);
+        //blastP(seq);
     }//GEN-LAST:event_blastPActionPerformed
 
     private void blastNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blastNActionPerformed
         // TODO add your handling code here:
-        blastN(seq);
+        //blastN(seq);
     }//GEN-LAST:event_blastNActionPerformed
 
-    
-    private void B
-    
+    private void showMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMeActionPerformed
+        drawSeq();
+        JOptionPane.showMessageDialog(null, "Druk op show me, dat is alles wat visueel gebeurt.");
+    }//GEN-LAST:event_showMeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -458,7 +486,7 @@ public class Gui extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -474,11 +502,12 @@ public class Gui extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Gui().setVisible(true);
+                Gui gui = new Gui();
+                gui.setVisible(true);
+                
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AddGene;
     private javax.swing.JMenuItem AminoAcids;
@@ -541,5 +570,25 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JButton showMe;
     // End of variables declaration//GEN-END:variables
+
+    public void drawSeq() {
+        ArrayList<Polynucleotide> NewFileArray = new ArrayList();
+        NewFile newFile = new NewFile();
+        String seq = "ACGTACATGCTAGCTGACTGATGCTAGCTGGATCGGGACGATCTATCGGATCGTAGCTTCAGTATCGTGCTACGTGATCGTACGTAGCTAGCTGTACGA";
+        String[] temp = {"description",seq};
+        String[][] newEntries = {temp};
+        NewFileArray.add(newFile.stringToObject(newEntries[0]));
+        Graphics seqView = SequenceView.getGraphics();
+        
+        seqView.setColor(Color.darkGray);
+        
+        
+        seqView.fill3DRect(5, 5, (NewFileArray.get(0).getSequence().length())*25, 20, rootPaneCheckingEnabled);
+        
+        seqView.setColor(Color.red);
+        seqView.drawString(NewFileArray.get(0).getSequence(), 10, 20);
+        
+    }
 }

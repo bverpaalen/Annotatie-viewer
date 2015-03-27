@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package AnnotationViewer;
+package annotationviewer;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class AnnotationViewer {
 
     static ArrayList<Polynucleotide> NewFileArray = new ArrayList();
 
-    public static void main(String[] args) {
+    public void bla() {
         AV.makeArrayList();
         for (int i = 0; i < NewFileArray.size(); i++) {
             if (NewFileArray.get(i) == null) {
@@ -26,7 +26,7 @@ public class AnnotationViewer {
     public static void makeArrayList() {
         Parser parse = new Parser();
         NewFile newFile = new NewFile();
-        String[][] newEntries = parse.fileToString("c:\\voorbeeld1.txt");
+        String[][] newEntries = parse.fileToString("c:\\homosapiens chromosome X.txt");
         for (int i = 1; i < newEntries.length; i++) {
             NewFileArray.add(newFile.stringToObject(newEntries[i]));
         }

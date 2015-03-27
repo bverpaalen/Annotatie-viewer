@@ -2,13 +2,27 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package AnnotationViewer;
+package annotationviewer;
+//package AnnotationViewer;
+
+import java.util.ArrayList;
 
 /**
  *
  * @author Karlijn
  */
 public class NewFile {
+    
+    static ArrayList<Polynucleotide> NewFileArray = new ArrayList();
+
+    public void makeObjectArrayList(String bestandsnaam) {
+        Parser parse = new Parser();
+        NewFile newFile = new NewFile();
+        String[][] newEntries = parse.fileToString(bestandsnaam);
+        for (int i = 1; i < newEntries.length; i++) {
+            NewFileArray.add(newFile.stringToObject(newEntries[i]));
+        }
+    }
 
     public Polynucleotide stringToObject(String seq[]) {
         Polynucleotide o = null;
