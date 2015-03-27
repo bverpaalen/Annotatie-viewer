@@ -32,7 +32,7 @@ public class Parser {
         String[] lijst = (fileString.split(">"));
         String descriptionSequence[][] = new String[lijst.length][2];
         for (int i = 1; i < lijst.length; i++) {
-            String[] lijst2 = (lijst[i]).split("genome");
+            String[] lijst2 = (lijst[i]).split("ENm006");
             for (int j = 0; j < lijst2.length; j++) {
                 descriptionSequence[i][j] = lijst2[j];
 

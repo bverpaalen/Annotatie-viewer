@@ -455,6 +455,9 @@ public class Gui extends javax.swing.JFrame {
             filename = (c.getCurrentDirectory().toString() + "\\" + c.getSelectedFile().getName());
             System.out.println(filename);
             newFile.makeObjectArrayList(filename);
+           // drawSeq(newFile.NewFileArray);
+                
+            
             
         }
     }//GEN-LAST:event_ItemOpenActionPerformed
@@ -474,7 +477,7 @@ public class Gui extends javax.swing.JFrame {
 
     private void showMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showMeActionPerformed
         drawSeq();
-        JOptionPane.showMessageDialog(null, "Druk op show me, dat is alles wat visueel gebeurt.");
+        
     }//GEN-LAST:event_showMeActionPerformed
 
     /**
@@ -504,6 +507,7 @@ public class Gui extends javax.swing.JFrame {
             public void run() {
                 Gui gui = new Gui();
                 gui.setVisible(true);
+                JOptionPane.showMessageDialog(null, "Druk op show me, dat is alles wat visueel gebeurt.");
                 
             }
         });
@@ -573,10 +577,18 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton showMe;
     // End of variables declaration//GEN-END:variables
 
+    public void drawSeq(ArrayList<Polynucleotide> NewFileArray) {
+        Graphics seqView = SequenceView.getGraphics();
+        seqView.setColor(Color.darkGray);
+        seqView.fill3DRect(5, 5, (NewFileArray.get(0).getSequence().length()), 20, rootPaneCheckingEnabled);
+        seqView.setColor(Color.red);
+        seqView.drawString(NewFileArray.get(0).getSequence(), 10, 20);
+    }
+    
     public void drawSeq() {
         ArrayList<Polynucleotide> NewFileArray = new ArrayList();
         NewFile newFile = new NewFile();
-        String seq = "ACGTACATGCTAGCTGACTGATGCTAGCTGGATCGGGACGATCTATCGGATCGTAGCTTCAGTATCGTGCTACGTGATCGTACGTAGCTAGCTGTACGA";
+        String seq = "ONZIN SEQUENTIE: ACGTACATGCTAGCTGACTGATGCTAGCTGGATCGGGACGATCTATCGGATCGTAGCTTCAGTATCGTGCTACGTGATCGTACGTAGCTAGCTGTACGA";
         String[] temp = {"description",seq};
         String[][] newEntries = {temp};
         NewFileArray.add(newFile.stringToObject(newEntries[0]));
