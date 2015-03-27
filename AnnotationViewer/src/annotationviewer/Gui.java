@@ -63,8 +63,8 @@ public class Gui extends javax.swing.JFrame {
         Blast = new javax.swing.JMenu();
         NCBIsearches = new javax.swing.JMenu();
         blastP = new javax.swing.JMenuItem();
-        TblastN = new javax.swing.JMenuItem();
         blastN = new javax.swing.JMenuItem();
+        TblastN = new javax.swing.JMenuItem();
         blastX = new javax.swing.JMenuItem();
         TblastX = new javax.swing.JMenuItem();
         Graph = new javax.swing.JMenu();
@@ -203,13 +203,23 @@ public class Gui extends javax.swing.JFrame {
         NCBIsearches.setText("NCBI Searches");
 
         blastP.setText("blastP");
+        blastP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blastPActionPerformed(evt);
+            }
+        });
         NCBIsearches.add(blastP);
+
+        blastN.setText("blastN");
+        blastN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                blastNActionPerformed(evt);
+            }
+        });
+        NCBIsearches.add(blastN);
 
         TblastN.setText("TblastN");
         NCBIsearches.add(TblastN);
-
-        blastN.setText("blastN");
-        NCBIsearches.add(blastN);
 
         blastX.setText("blastX");
         NCBIsearches.add(blastX);
@@ -423,6 +433,22 @@ public class Gui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ItemOpenActionPerformed
 
+    //blast knop voor blastP
+    //aantal alignments in de blast kan gekozen worden
+    //TODO welke variabelen is de seq?
+    private void blastPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blastPActionPerformed
+        // TODO add your handling code here:
+        blastP(seq);
+    }//GEN-LAST:event_blastPActionPerformed
+
+    private void blastNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blastNActionPerformed
+        // TODO add your handling code here:
+        blastN(seq);
+    }//GEN-LAST:event_blastNActionPerformed
+
+    
+    private void B
+    
     /**
      * @param args the command line arguments
      */
