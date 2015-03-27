@@ -32,7 +32,8 @@ public class Blast {
     //testje
     /*
     public static void main(String[] args) throws Exception {
-        blastp("MKWVTFISLLFLFSSAYSRGVFRRDAHKSEVAHRFKDLGEENFKALVLIAFAQYLQQCP",200);        
+        //blastp("MKWVTFISLLFLFSSAYSRGVFRRDAHKSEVAHRFKDLGEENFKALVLIAFAQYLQQCP",200); 
+        //blastn("GGTGACGGAATTCGCCCGGACGCAAAAGACGGACAGCTAGGTATCCTGAGCACGGTTGCGCGTCCGAATCAAGCT",200);
     }*/
 private static final String OUTPUT_FILE = "blastOutput.xml"; //file naam met output blast
 static int aantalAligNumberBP = 100; //standaard aantal alignments in de blast bij blastp
@@ -103,7 +104,6 @@ static int aantalAligNumberBN = 100; //standaard aantal alignments in de blast b
     //even dweilen alles schoonmaken
     IOUtils.close(writer);
     IOUtils.close(reader);
-        System.out.println(aantalAligNumber);
     return filePath;   
 }
     

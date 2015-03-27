@@ -125,15 +125,21 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="blastP"/>
                   </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="TblastN">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="TblastN"/>
-                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="blastPActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="blastN">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="blastN"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="blastNActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="TblastN">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="TblastN"/>
                   </Properties>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="blastX">
