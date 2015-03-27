@@ -30,10 +30,10 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
  */
 public class Blast {
     //testje
-    
+    /*
     public static void main(String[] args) throws Exception {
         blastp("MKWVTFISLLFLFSSAYSRGVFRRDAHKSEVAHRFKDLGEENFKALVLIAFAQYLQQCP",200);        
-    }
+    }*/
 private static final String OUTPUT_FILE = "blastOutput.xml"; //file naam met output blast
 static int aantalAligNumberBP = 100; //standaard aantal alignments in de blast bij blastp
 static int aantalAligNumberBN = 100; //standaard aantal alignments in de blast bij blastn    
