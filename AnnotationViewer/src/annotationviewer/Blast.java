@@ -30,12 +30,21 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
  */
 public class Blast {
     //testje
-    /*
+    
     public static void main(String[] args) throws Exception {
         blastp("MKWVTFISLLFLFSSAYSRGVFRRDAHKSEVAHRFKDLGEENFKALVLIAFAQYLQQCP",200);
-    }*/
+    }
 private static final String OUTPUT_FILE = "blastOutput.xml"; //file naam met output blast
-public static String blastp(String seq,int aantalAligNumber) throws CompoundNotFoundException, Exception{
+int aantalAligNumber = 100; //standaard aantal alignments in de blast
+    /**
+     *
+     * @param seq de eiwit sequentie die geblast moet worden (standaard = 100)
+     * @param aantalAligNumber anntal alignments er in de blast gestopt moeten worden
+     * @return returned de pathway van de file waar de resultaten van de blast in staan
+     * @throws CompoundNotFoundException
+     * @throws Exception
+     */
+    public static String blastp(String seq,int aantalAligNumber) throws CompoundNotFoundException, Exception{
     NCBIQBlastService service = new NCBIQBlastService();
     String filePath = "";
     
@@ -93,6 +102,7 @@ public static String blastp(String seq,int aantalAligNumber) throws CompoundNotF
     //even dweilen alles schoonmaken
     IOUtils.close(writer);
     IOUtils.close(reader);
+        System.out.println(aantalAligNumber);
     return filePath;   
 }  
 }
