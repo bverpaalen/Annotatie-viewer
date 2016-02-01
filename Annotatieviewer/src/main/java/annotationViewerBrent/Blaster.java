@@ -22,7 +22,7 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
 public class Blaster {    
     private static final String BLAST_OUTPUT_FILE = "blastOutput.xml";
     
-    private void blastP(String seq,String database){
+    void blastP(String seq,String database){
         String rid = null;
         FileWriter writer = null;
         BufferedReader reader = null;        
@@ -35,7 +35,7 @@ public class Blaster {
         NCBIQBlastOutputProperties outputProps = new NCBIQBlastOutputProperties();
         try{
                         // send blast request and save request id
-			rid = blastService.sendAlignmentRequest(SEQUENCE, props);
+			rid = blastService.sendAlignmentRequest(seq, props);
  
 			// wait until results become available. Alternatively, one can do other computations/send other alignment requests
 			while (!blastService.isReady(rid)) {
@@ -65,12 +65,55 @@ public class Blaster {
             IOUtils.close(writer);
             IOUtils.close(reader);
             
-            service.sendDeleteRequest(rid);
+            blastService.sendDeleteRequest(rid);
         }
         
     }
     
-    private void blastN(String seq){
+    void blastN(String seq,String database){
+        String rid = null;
+        FileWriter writer = null;
+        BufferedReader reader = null;        
+        NCBIQBlastService blastService = new NCBIQBlastService();
+        NCBIQBlastAlignmentProperties props = new NCBIQBlastAlignmentProperties();
         
+        props.setBlastProgram(BlastProgramEnum.blastn);
+        props.setBlastDatabase(database);
+        
+        NCBIQBlastOutputProperties outputProps = new NCBIQBlastOutputProperties();
+        try{
+                        // send blast request and save request id
+			rid = blastService.sendAlignmentRequest(seq, props);
+ 
+			// wait until results become available. Alternatively, one can do other computations/send other alignment requests
+			while (!blastService.isReady(rid)) {
+				System.out.println("Waiting for results. Sleeping for 5 seconds");
+				Thread.sleep(5000);
+			}
+ 
+			// read results when they are ready
+			InputStream in = blastService.getAlignmentResults(rid, outputProps);
+			reader = new BufferedReader(new InputStreamReader(in));
+ 
+			// write blast output to specified file
+			File f = new File(BLAST_OUTPUT_FILE);
+			System.out.println("Saving query results in file " + f.getAbsolutePath());
+			writer = new FileWriter(f);
+ 
+			String line;
+			while ((line = reader.readLine()) != null) {
+				writer.write(line + System.getProperty("line.separator"));
+			}
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        finally{
+            IOUtils.close(writer);
+            IOUtils.close(reader);
+            
+            blastService.sendDeleteRequest(rid);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package annotationviewer;
+package annotationViewerBrent;
 
 import annotationViewerBrent.Polynucleotide;
 
