@@ -1,7 +1,5 @@
 package annotationViewerBrent;
 
-import annotationViewerBrent.Polynucleotide;
-
 public class RNA extends Polynucleotide {
 
     public Protein protein;

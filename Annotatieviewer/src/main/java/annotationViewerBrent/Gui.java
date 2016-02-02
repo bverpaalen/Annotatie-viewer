@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class Gui extends javax.swing.JFrame {
 
-    final static String randomSeq = "ACTGACTGACTG";
+    final static String randomSeq = "ACGTACATGCTAGCTGACTGATGCTAGCTGGATCGGGACGATCTATCGGATCGTAGCTTCAGTATCGTGCTACGTGATCGTACGTAGCTAGCTGTACGA";
     final static String database = "swissprot";
     String filename = "";
     Blaster blaster = new Blaster();

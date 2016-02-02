@@ -594,9 +594,7 @@ public class Gui extends javax.swing.JFrame {
         String[][] newEntries = {temp};
         NewFileArray.add(newFile.stringToObject(newEntries[0]));
         Graphics seqView = SequenceView.getGraphics();
-        
         seqView.setColor(Color.darkGray);
-        
         
         seqView.fill3DRect(5, 5, (NewFileArray.get(0).getSequence().length())*25, 20, rootPaneCheckingEnabled);
         

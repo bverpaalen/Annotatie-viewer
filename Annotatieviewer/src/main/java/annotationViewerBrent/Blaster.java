@@ -29,6 +29,7 @@ public class Blaster {
         NCBIQBlastService blastService = new NCBIQBlastService();
         NCBIQBlastAlignmentProperties props = new NCBIQBlastAlignmentProperties();
         
+        
         props.setBlastProgram(BlastProgramEnum.blastp);
         props.setBlastDatabase(database);
         
@@ -78,17 +79,25 @@ public class Blaster {
         NCBIQBlastAlignmentProperties props = new NCBIQBlastAlignmentProperties();
         
         props.setBlastProgram(BlastProgramEnum.blastn);
-        props.setBlastDatabase(database);
+        props.setBlastDatabase("nr");
+        
+        System.out.println("Using database: "+ database);
+        
+        try{
+        //databases
+        System.out.println(blastService.getRemoteBlastInfo());
         
         NCBIQBlastOutputProperties outputProps = new NCBIQBlastOutputProperties();
-        try{
+        
                         // send blast request and save request id
 			rid = blastService.sendAlignmentRequest(seq, props);
+                        
  
 			// wait until results become available. Alternatively, one can do other computations/send other alignment requests
 			while (!blastService.isReady(rid)) {
-				System.out.println("Waiting for results. Sleeping for 5 seconds");
+				System.out.println("Waiting for results. Sleeping for 5 seconds");                               
 				Thread.sleep(5000);
+                                System.out.println(blastService.isReady(rid));
 			}
  
 			// read results when they are ready
