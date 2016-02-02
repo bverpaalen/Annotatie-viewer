@@ -23,6 +23,5 @@
         </dependency>
         
     </dependencies>
-
-
+    <name>Annotatieviewer</name>
 </project>
