@@ -42,6 +42,7 @@ public class Blaster {
 			while (!blastService.isReady(rid)) {
 				System.out.println("Waiting for results. Sleeping for 5 seconds");
 				Thread.sleep(5000);
+                                blastService.isReady(rid);
 			}
  
 			// read results when they are ready
