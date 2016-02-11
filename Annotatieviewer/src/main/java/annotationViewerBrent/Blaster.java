@@ -21,7 +21,12 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
  */
 public class Blaster {    
     private static final String BLAST_OUTPUT_FILE = "blastOutput.xml";
-    
+
+    /**
+     * Blasting protein sequence against given database
+     * @param seq Protein sequence to blast
+     * @param database database to blast against
+     */
     void blastP(String seq,String database){
         String rid = null;
         FileWriter writer = null;
@@ -71,7 +76,12 @@ public class Blaster {
         }
         
     }
-    
+
+    /**
+     * Blasting nucleotide(DNA) sequence against given database
+     * @param seq DNA sequence
+     * @param database database to blast against
+     */
     void blastN(String seq,String database){
         String rid = null;
         FileWriter writer = null;
