@@ -21,13 +21,19 @@ import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastService;
  */
 public class Blaster {    
     private static final String BLAST_OUTPUT_FILE = "blastOutput.xml";
-    
+
+    /**
+     * Blasting protein sequence against given database
+     * @param seq Protein sequence to blast
+     * @param database database to blast against
+     */
     void blastP(String seq,String database){
         String rid = null;
         FileWriter writer = null;
         BufferedReader reader = null;        
         NCBIQBlastService blastService = new NCBIQBlastService();
         NCBIQBlastAlignmentProperties props = new NCBIQBlastAlignmentProperties();
+        
         
         props.setBlastProgram(BlastProgramEnum.blastp);
         props.setBlastDatabase(database);
@@ -41,6 +47,7 @@ public class Blaster {
 			while (!blastService.isReady(rid)) {
 				System.out.println("Waiting for results. Sleeping for 5 seconds");
 				Thread.sleep(5000);
+                                blastService.isReady(rid);
 			}
  
 			// read results when they are ready
@@ -69,7 +76,12 @@ public class Blaster {
         }
         
     }
-    
+
+    /**
+     * Blasting nucleotide(DNA) sequence against given database
+     * @param seq DNA sequence
+     * @param database database to blast against
+     */
     void blastN(String seq,String database){
         String rid = null;
         FileWriter writer = null;
@@ -78,17 +90,25 @@ public class Blaster {
         NCBIQBlastAlignmentProperties props = new NCBIQBlastAlignmentProperties();
         
         props.setBlastProgram(BlastProgramEnum.blastn);
-        props.setBlastDatabase(database);
+        props.setBlastDatabase("nr");
+        
+        System.out.println("Using database: "+ database);
+        
+        try{
+        //databases
+        System.out.println(blastService.getRemoteBlastInfo());
         
         NCBIQBlastOutputProperties outputProps = new NCBIQBlastOutputProperties();
-        try{
+        
                         // send blast request and save request id
 			rid = blastService.sendAlignmentRequest(seq, props);
+                        
  
 			// wait until results become available. Alternatively, one can do other computations/send other alignment requests
 			while (!blastService.isReady(rid)) {
-				System.out.println("Waiting for results. Sleeping for 5 seconds");
+				System.out.println("Waiting for results. Sleeping for 5 seconds");                               
 				Thread.sleep(5000);
+                                System.out.println(blastService.isReady(rid));
 			}
  
 			// read results when they are ready

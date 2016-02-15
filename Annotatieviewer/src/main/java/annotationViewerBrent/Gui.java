@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class Gui extends javax.swing.JFrame {
 
-    final static String randomSeq = "ACTGACTGACTG";
+    final static String randomSeq = "ACGTACATGCTAGCTGACTGATGCTAGCTGGATCGGGACGATCTATCGGATCGTAGCTTCAGTATCGTGCTACGTGATCGTACGTAGCTAGCTGTACGA";   
     final static String database = "swissprot";
     String filename = "";
     Blaster blaster = new Blaster();
@@ -482,7 +482,27 @@ public class Gui extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.println("knop: BLAST->NCBI Searches->blastP");
         
-        blaster.blastP(randomSeq,database);
+        String[] randomSeqAndDesc = {"description",randomSeq};    
+        DNA randomDNA = new DNA();
+        RNA randomRNA = new RNA();
+        Protein randomProtein = new Protein();
+        
+        randomDNA.setDescription(randomSeqAndDesc[0]);
+        randomDNA.setSequence(randomSeqAndDesc[1]);
+        
+        randomRNA.setDescription(randomDNA.getDescription());
+        randomRNA.setSequence(randomDNA.getTranscript());
+        
+        randomProtein.setDescription(randomRNA.getDescription());
+        randomProtein.setSequence(randomRNA.getTranslation());
+        
+        
+        
+        
+        
+        //TODO proteinseq moet nucleotide seq zijn die proteine word
+        
+        blaster.blastP(randomProtein.getSequence(),database);
     }//GEN-LAST:event_blastPActionPerformed
 
     private void blastNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blastNActionPerformed

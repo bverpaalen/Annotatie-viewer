@@ -1,7 +1,5 @@
 package annotationViewerBrent;
 
-import annotationViewerBrent.Polynucleotide;
-
 public class RNA extends Polynucleotide {
 
     public Protein protein;
@@ -10,6 +8,10 @@ public class RNA extends Polynucleotide {
         super();
     }
 
+    /**
+     * Translates local RNA sequence to Protein sequence
+     * @return String of protein sequence
+     */
     public String getTranslation() {
         StringBuilder sb = new StringBuilder();
         String rna = getComplement();
@@ -136,6 +138,11 @@ public class RNA extends Polynucleotide {
         return str.toString();
     }
 
+    /**
+     * Get complements of the given RNA string
+     *
+     * @return RNA string complemented of local RNA string
+     */
     @Override
     public String getComplement() {
         String seq;

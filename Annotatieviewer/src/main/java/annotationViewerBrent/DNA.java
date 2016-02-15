@@ -2,18 +2,28 @@ package annotationViewerBrent;
 
 import annotationViewerBrent.Polynucleotide;
 
+
 public class DNA extends Polynucleotide {
+
 
     public DNA() {
         super();
     }
 
+    /**
+     * Transcripts local DNA to RNA
+     * @return RNA sequence
+     */
     public String getTranscript() {
         String transcript = getComplement();
         transcript = transcript.replaceAll("T", "U");
         return transcript;
     }
 
+    /**
+     * Complements local DNA string
+     * @return String of complemented given DNA string
+     */
     @Override
     public String getComplement() {
         String seq;

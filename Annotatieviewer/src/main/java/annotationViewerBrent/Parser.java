@@ -77,6 +77,12 @@ public class Parser {
         return o;
     }
 
+    /**
+     * Checks if given sequence is DNA or RNA sequence
+     * @param seq sequence to check
+     * @return String with type of sequence
+     * @throws wrongSeq Sequence contains non RNA or DNA characters
+     */
     public String checkDnaRna(String seq) throws wrongSeq {
         String type = "";
         if (seq == null) {
