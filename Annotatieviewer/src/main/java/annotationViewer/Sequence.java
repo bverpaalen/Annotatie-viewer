@@ -1,4 +1,4 @@
-package annotationviewer;
+package annotationViewer;
 
 
 public abstract class Sequence {

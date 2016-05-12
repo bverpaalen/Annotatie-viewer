@@ -1,6 +1,6 @@
-package annotationViewerBrent;
+package annotationViewer;
 
-import annotationViewerBrent.Polynucleotide;
+import annotationViewer.Polynucleotide;
 
 
 public class DNA extends Polynucleotide {

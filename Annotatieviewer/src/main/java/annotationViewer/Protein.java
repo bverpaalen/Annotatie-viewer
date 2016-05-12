@@ -1,8 +1,8 @@
-package annotationViewerBrent;
+package annotationViewer;
 
 
-import annotationviewer.RNA;
-import annotationviewer.Sequence;
+import annotationViewer.RNA;
+import annotationViewer.Sequence;
 
 /**
  * <!-- begin-user-doc -->

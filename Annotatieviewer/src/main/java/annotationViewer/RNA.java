@@ -1,4 +1,4 @@
-package annotationViewerBrent;
+package annotationViewer;
 
 public class RNA extends Polynucleotide {
 

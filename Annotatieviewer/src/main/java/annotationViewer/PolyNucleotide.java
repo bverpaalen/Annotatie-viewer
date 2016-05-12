@@ -1,6 +1,6 @@
-package annotationViewerBrent;
+package annotationViewer;
 
-import annotationviewer.Sequence;
+import annotationViewer.Sequence;
 
 
 /**
