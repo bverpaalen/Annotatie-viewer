@@ -8,8 +8,11 @@ package annotationViewerBrent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.biojava.nbio.core.sequence.io.util.IOUtils;
 import org.biojava.nbio.ws.alignment.qblast.BlastProgramEnum;
 import org.biojava.nbio.ws.alignment.qblast.NCBIQBlastAlignmentProperties;
@@ -27,7 +30,9 @@ public class Blaster {
      * @param seq Protein sequence to blast
      * @param database database to blast against
      */
-    void blastP(String seq,String database){
+    
+    
+    BufferedReader blastP(String seq,String database){
         String rid = null;
         FileWriter writer = null;
         BufferedReader reader = null;        
@@ -53,24 +58,16 @@ public class Blaster {
 			// read results when they are ready
 			InputStream in = blastService.getAlignmentResults(rid, outputProps);
 			reader = new BufferedReader(new InputStreamReader(in));
- 
-			// write blast output to specified file
-			File f = new File(BLAST_OUTPUT_FILE);
-			System.out.println("Saving query results in file " + f.getAbsolutePath());
-			writer = new FileWriter(f);
- 
-			String line;
-			while ((line = reader.readLine()) != null) {
-				writer.write(line + System.getProperty("line.separator"));
-			}
+                        System.out.println(reader.readLine());
+                        return reader;			
         }
         catch(Exception e){
             System.out.println(e.getMessage());
             e.printStackTrace();
+            return null;
         }
         finally{
             IOUtils.close(writer);
-            IOUtils.close(reader);
             
             blastService.sendDeleteRequest(rid);
         }
@@ -82,7 +79,7 @@ public class Blaster {
      * @param seq DNA sequence
      * @param database database to blast against
      */
-    void blastN(String seq,String database){
+    BufferedReader blastN(String seq,String database){
         String rid = null;
         FileWriter writer = null;
         BufferedReader reader = null;        
@@ -90,13 +87,12 @@ public class Blaster {
         NCBIQBlastAlignmentProperties props = new NCBIQBlastAlignmentProperties();
         
         props.setBlastProgram(BlastProgramEnum.blastn);
-        props.setBlastDatabase("nr");
+        props.setBlastDatabase(database);
         
         System.out.println("Using database: "+ database);
         
         try{
         //databases
-        System.out.println(blastService.getRemoteBlastInfo());
         
         NCBIQBlastOutputProperties outputProps = new NCBIQBlastOutputProperties();
         
@@ -115,25 +111,41 @@ public class Blaster {
 			InputStream in = blastService.getAlignmentResults(rid, outputProps);
 			reader = new BufferedReader(new InputStreamReader(in));
  
-			// write blast output to specified file
-			File f = new File(BLAST_OUTPUT_FILE);
-			System.out.println("Saving query results in file " + f.getAbsolutePath());
-			writer = new FileWriter(f);
- 
-			String line;
-			while ((line = reader.readLine()) != null) {
-				writer.write(line + System.getProperty("line.separator"));
-			}
+			return reader;
         }
         catch(Exception e){
             System.out.println(e.getMessage());
             e.printStackTrace();
+            return null;
         }
         finally{
             IOUtils.close(writer);
-            IOUtils.close(reader);
             
             blastService.sendDeleteRequest(rid);
+        }
+    }
+    void writeFileBlast(BufferedReader reader,String nameFile){
+        FileWriter writer = null;
+        try {
+            // write blast output to specified file
+            File f = new File(nameFile);
+            System.out.println("Saving query results in file " + f.getAbsolutePath());
+            writer = new FileWriter(f);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(line + System.getProperty("line.separator"));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Blaster.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                writer.close();
+                IOUtils.close(reader);
+                
+                
+            } catch (IOException ex) {
+                Logger.getLogger(Blaster.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

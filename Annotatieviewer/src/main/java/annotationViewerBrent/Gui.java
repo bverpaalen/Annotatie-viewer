@@ -9,6 +9,7 @@ package annotationViewerBrent;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -19,9 +20,21 @@ import javax.swing.JOptionPane;
  */
 public class Gui extends javax.swing.JFrame {
 
-    final static String randomSeq = "ACGTACATGCTAGCTGACTGATGCTAGCTGGATCGGGACGATCTATCGGATCGTAGCTTCAGTATCGTGCTACGTGATCGTACGTAGCTAGCTGTACGA";   
+    final static String randomSeq = "CAAGAAGAAAAAAGAAAATCGATTTCAGTACCGGAACAAAAGTGAGAGAGAACAACCCTCAGAATTTCTT\n" +
+                                    "CTGAGACACCACATAAAACGGAGGGTACGACACTCATAGAAGGACTCGAATCACGGGGGTTTGGGACTCA\n" +
+                                    "CGCTGTACAAACTTCCGTCCGCGGCGACGGAGCATCCTTCATCCAGGTAGCCACCCTTGGTAACAAGAGC\n" +
+                                    "AGCGATACCACACGCGCTCAACCGTGCAGCCCTGCGCCCGACAAGCTTGGCCAGAGCCCTATATCCGAGG\n" +
+                                    "TTTTAGCATCCCCGCACGCAAAGCTCCCGATTCATGCCTAAACCCACCGGAAGAATTGCCTCTCCGCCAA\n" +
+                                    "AGTGGTTTCAATTCCATAGAAATGGGTAAAAATTCCGACGATCGTCAATAGTTCATCGGTGGGGTCAGAT\n" +
+                                    "TCCATGAGTGAGAGGAATGCGGTATCGAACGAATAGGCCCTTTCGATTTTGTAAGTGTTTTGTCCCAGGA\n" +
+                                    "ACAGGACACCCTCATCGATGAGCTCGCAAACAATAAGGCGTAGAATTTCGCCAAGGTATCGGCCAGAAAT\n" +
+                                    "GAGTTTCTGAAAGATAGATTAGTTATTGCAGAGGTGAAACTGGGGGAGGGCCCCACCTCGAAAG\n" +
+                                    "";   
     final static String database = "swissprot";
+    //TODO make standerd filename
     String filename = "";
+    String blastPFilename = "blastP.xml";
+    String blastNFilename = "blastN.xml";
     Blaster blaster = new Blaster();
 
     /**
@@ -483,6 +496,8 @@ public class Gui extends javax.swing.JFrame {
         System.out.println("knop: BLAST->NCBI Searches->blastP");
         
         String[] randomSeqAndDesc = {"description",randomSeq};    
+        BufferedReader output;
+        
         DNA randomDNA = new DNA();
         RNA randomRNA = new RNA();
         Protein randomProtein = new Protein();
@@ -502,13 +517,16 @@ public class Gui extends javax.swing.JFrame {
         
         //TODO proteinseq moet nucleotide seq zijn die proteine word
         
-        blaster.blastP(randomProtein.getSequence(),database);
+        output = blaster.blastP(randomProtein.getSequence(),database);
+        blaster.writeFileBlast(output, blastPFilename);
     }//GEN-LAST:event_blastPActionPerformed
 
     private void blastNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blastNActionPerformed
         // TODO add your handling code here:
+        BufferedReader output;
         System.out.println("knop: BLAST->NCBI Searches->blastN");
-        blaster.blastN(randomSeq,database);
+        output = blaster.blastN("ACTGACTGACTG","nr");
+        blaster.writeFileBlast(output, blastNFilename);
     }//GEN-LAST:event_blastNActionPerformed
 
 
@@ -518,6 +536,34 @@ public class Gui extends javax.swing.JFrame {
         
     }//GEN-LAST:event_showMeActionPerformed
 
+    public void drawSeq(ArrayList<Polynucleotide> NewFileArray) {
+        Graphics seqView = SequenceView.getGraphics();
+        seqView.setColor(Color.darkGray);
+        seqView.fill3DRect(5, 5, (NewFileArray.get(0).getSequence().length()), 20, rootPaneCheckingEnabled);
+        seqView.setColor(Color.red);
+        seqView.drawString(NewFileArray.get(0).getSequence(), 10, 20);
+    }
+    
+    public void drawSeq() {
+        ArrayList<Polynucleotide> NewFileArray = new ArrayList();
+        Parser toParse = new Parser();
+        Polynucleotide objectEntrie;
+        
+        String randomSeq = "ACGTACATGCTAGCTGACTGATGCTAGCTGGATCGGGACGATCTATCGGATCGTAGCTTCAGTATCGTGCTACGTGATCGTACGTAGCTAGCTGTACGA";
+        String[] seqAndDesc = {"description",randomSeq};
+        String[][] newEntries = {seqAndDesc};
+        
+        objectEntrie = toParse.stringToObject(newEntries[0]);
+        NewFileArray.add(objectEntrie);
+        
+        Graphics seqView = SequenceView.getGraphics();        
+        seqView.setColor(Color.darkGray);
+               
+        seqView.fill3DRect(5, 5, (NewFileArray.get(0).getSequence().length())*25, 20, rootPaneCheckingEnabled); 
+        seqView.setColor(Color.red);
+        seqView.drawString(NewFileArray.get(0).getSequence(), 10, 20);
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -555,11 +601,12 @@ public class Gui extends javax.swing.JFrame {
             public void run() {
                 Gui gui = new Gui();
                 gui.setVisible(true);
-                JOptionPane.showMessageDialog(null, "Druk op show me, dat is alles wat visueel gebeurt.");
+                //JOptionPane.showMessageDialog(null, "Druk op show me, dat is alles wat visueel gebeurt.");
                 
             }
         });
     }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AddGene;
     private javax.swing.JMenuItem AminoAcids;
@@ -625,32 +672,5 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JButton showMe;
     // End of variables declaration//GEN-END:variables
 
-    public void drawSeq(ArrayList<Polynucleotide> NewFileArray) {
-        Graphics seqView = SequenceView.getGraphics();
-        seqView.setColor(Color.darkGray);
-        seqView.fill3DRect(5, 5, (NewFileArray.get(0).getSequence().length()), 20, rootPaneCheckingEnabled);
-        seqView.setColor(Color.red);
-        seqView.drawString(NewFileArray.get(0).getSequence(), 10, 20);
-    }
-    
-    public void drawSeq() {
-        ArrayList<Polynucleotide> NewFileArray = new ArrayList();
-        Parser toParse = new Parser();
-        Polynucleotide objectEntrie;
         
-        String randomSeq = "ACGTACATGCTAGCTGACTGATGCTAGCTGGATCGGGACGATCTATCGGATCGTAGCTTCAGTATCGTGCTACGTGATCGTACGTAGCTAGCTGTACGA";
-        String[] seqAndDesc = {"description",randomSeq};
-        String[][] newEntries = {seqAndDesc};
-        
-        objectEntrie = toParse.stringToObject(newEntries[0]);
-        NewFileArray.add(objectEntrie);
-        
-        Graphics seqView = SequenceView.getGraphics();        
-        seqView.setColor(Color.darkGray);
-               
-        seqView.fill3DRect(5, 5, (NewFileArray.get(0).getSequence().length())*25, 20, rootPaneCheckingEnabled); 
-        seqView.setColor(Color.red);
-        seqView.drawString(NewFileArray.get(0).getSequence(), 10, 20);
-        
-    }    
 }

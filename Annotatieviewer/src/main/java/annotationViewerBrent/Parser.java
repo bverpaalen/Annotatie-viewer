@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Parser {
-    static ArrayList<Polynucleotide> NewFileArray = new ArrayList();
+    static ArrayList<Polynucleotide> polynulcleotideArray = new ArrayList();
 
     public String[][] fileToString(String fileName) {
         String line;
@@ -46,7 +46,7 @@ public class Parser {
     public void makeObjectArrayList(String bestandsnaam) {
         String[][] newEntries = fileToString(bestandsnaam);
         for (int i = 1; i < newEntries.length; i++) {
-            NewFileArray.add(stringToObject(newEntries[i]));
+            polynulcleotideArray.add(stringToObject(newEntries[i]));
         }
     }
 
